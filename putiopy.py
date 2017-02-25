@@ -574,6 +574,9 @@ class _Subtitle(_BaseResource):
         path = self.get_download_link()
 
         filepath = os.path.join(dest, name)
+        if os.path.exists(filepath):
+            return filepath
+
         logger.info('downloading subtitle file to: %s', filepath)
         response = self.client.request(path, method='GET', raw=True)
         with open(filepath, 'w') as f:
